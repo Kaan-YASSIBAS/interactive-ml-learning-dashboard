@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Nearest Neighbors</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <main class="container">
+        <section class="hero-card">
+            <a href="../index.html" class="back-link">← Ana Sayfaya Dön</a>
+
+            <div class="hero-header">
+                <span class="badge">Supervised Learning → Classification</span>
+                <h1>K-Nearest Neighbors</h1>
+                <p class="subtitle">
+                    KNN, yeni bir veriyi en yakın komşularına bakarak sınıflandıran basit ama güçlü bir classification algoritmasıdır.
+                </p>
+            </div>
+
+            <section class="content-grid">
+                <article class="info-card">
+                    <h2>Ne İşe Yarar?</h2>
+                    <p>
+                        KNN, eğitim sırasında karmaşık bir model öğrenmez. Yeni bir veri geldiğinde,
+                        eğitim verisindeki en yakın K komşuya bakar ve çoğunluk hangi sınıftaysa o sınıfı tahmin eder.
+                    </p>
+
+                    <h2>Temel Formül</h2>
+                    <div class="formula-box">
+                        d = √((x₂ - x₁)² + (y₂ - y₁)²)
+                    </div>
+
+                    <p>
+                        Bu formül iki nokta arasındaki uzaklığı gösterir. KNN, yeni noktaya en yakın örnekleri bu uzaklık mantığıyla bulur.
+                    </p>
+
+                    <h2>K Değeri Ne Demek?</h2>
+                    <p>
+                        K, kaç komşuya bakılacağını belirler. Küçük K değeri daha hassas ama gürültüye açık olabilir.
+                        Büyük K değeri daha stabil olabilir ama bazı detayları kaçırabilir.
+                    </p>
+                </article>
+
+                <article class="info-card">
+                    <h2>KNN Deneyi</h2>
+                    <p class="small-note">Ondalık değerler için nokta kullanın. Örnek: 5.1</p>
+
+                    <div class="form-group">
+                        <label for="kInput">K Değeri</label>
+                        <input type="number" id="kInput" min="1" max="15" step="1" value="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sepalLengthInput">Sepal Length</label>
+                        <input type="number" id="sepalLengthInput" step="0.1" value="5.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sepalWidthInput">Sepal Width</label>
+                        <input type="number" id="sepalWidthInput" step="0.1" value="3.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="petalLengthInput">Petal Length</label>
+                        <input type="number" id="petalLengthInput" step="0.1" value="1.4">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="petalWidthInput">Petal Width</label>
+                        <input type="number" id="petalWidthInput" step="0.1" value="0.2">
+                    </div>
+
+                    <button id="runButton">KNN Çalıştır</button>
+
+                    <div id="errorBox" class="error hidden"></div>
+
+                    <section id="resultSection" class="hidden">
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <span>K</span>
+                                <strong id="kValue">-</strong>
+                            </div>
+                            <div class="metric">
+                                <span>Accuracy</span>
+                                <strong id="accuracyValue">-</strong>
+                            </div>
+                            <div class="metric">
+                                <span>Örnek Tahmin</span>
+                                <strong id="predictionValue">-</strong>
+                            </div>
+                            <div class="metric">
+                                <span>Dataset</span>
+                                <strong>Iris</strong>
+                            </div>
+                        </div>
+
+                        <div class="probability-section">
+                            <h3>Örnek Çiçek İçin Olasılıklar</h3>
+
+                            <div class="probability-row">
+                                <div class="probability-label">
+                                    <span>Setosa</span>
+                                    <strong id="setosaText">-</strong>
+                                </div>
+                                <div class="bar-track">
+                                    <div id="setosaBar" class="bar-fill ham-bar"></div>
+                                </div>
+                            </div>
+
+                            <div class="probability-row">
+                                <div class="probability-label">
+                                    <span>Versicolor</span>
+                                    <strong id="versicolorText">-</strong>
+                                </div>
+                                <div class="bar-track">
+                                    <div id="versicolorBar" class="bar-fill spam-bar"></div>
+                                </div>
+                            </div>
+
+                            <div class="probability-row">
+                                <div class="probability-label">
+                                    <span>Virginica</span>
+                                    <strong id="virginicaText">-</strong>
+                                </div>
+                                <div class="bar-track">
+                                    <div id="virginicaBar" class="bar-fill svm-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </section>
+
+            <section class="info-card chart-section">
+                <h2>Görselleştirme</h2>
+                <p>
+                    Iris dataset 4 feature içerir. Görselleştirme için PCA ile 2 boyuta indiriyoruz.
+                    Her nokta bir çiçeği temsil eder.
+                </p>
+
+                <div class="chart-box">
+                    <canvas id="knnChart"></canvas>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/knn.js"></script>
+</body>
+</html>

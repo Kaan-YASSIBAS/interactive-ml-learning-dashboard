@@ -1,10 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from app.ml.linear_regression import get_linear_regression_info, predict_exam_score
 from app.ml.logistic_regression import get_logistic_regression_info, predict_message_class
-
+from app.ml.knn import evaluate_knn
 
 app = FastAPI(title="Interactive ML Learning Dashboard API")
 
@@ -69,3 +69,20 @@ def logistic_regression_info():
 @app.post("/logistic-regression/predict")
 def logistic_regression_predict(request: LogisticRegressionPredictionRequest):
     return predict_message_class(request.message)
+
+#================ KNN Endpoints ================
+@app.get("/knn")
+def knn_info(
+    k: int = Query(5, ge=1, le=15),
+    sepal_length: float = Query(5.1, ge=0),
+    sepal_width: float = Query(3.5, ge=0),
+    petal_length: float = Query(1.4, ge=0),
+    petal_width: float = Query(0.2, ge=0)
+):
+    return evaluate_knn(
+        k,
+        sepal_length,
+        sepal_width,
+        petal_length,
+        petal_width
+    )

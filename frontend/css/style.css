@@ -426,3 +426,14 @@ textarea:focus {
         transform: rotate(90deg);
     }
 }
+
+.svm-bar {
+    background: #8b5cf6;
+}
+
+.small-note {
+    margin-top: -8px;
+    margin-bottom: 14px;
+    color: #64748b;
+    font-size: 13px;
+}

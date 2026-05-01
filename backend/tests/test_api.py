@@ -24,3 +24,18 @@ def test_root_endpoint():
 
     assert data["project"] == "Interactive ML Learning Dashboard"
     assert data["status"] == "running"
+
+
+def test_decision_tree_endpoint():
+    response = client.get("/decision-tree?max_depth=3")
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert data["algorithm"] == "Decision Tree"
+    assert data["max_depth"] == 3
+    assert "train_accuracy" in data
+    assert "test_accuracy" in data
+    assert "sample" in data
+    assert "rules" in data

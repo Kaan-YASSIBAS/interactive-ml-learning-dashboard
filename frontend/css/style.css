@@ -437,3 +437,60 @@ textarea:focus {
     color: #64748b;
     font-size: 13px;
 }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    margin-top: 14px;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.table th {
+    background: #f3f4f6;
+}
+
+.rules-table {
+    table-layout: fixed;
+}
+
+.rules-table th:nth-child(1),
+.rules-table td:nth-child(1) {
+    width: 90px;
+    text-align: center;
+}
+
+.rules-table th:nth-child(2),
+.rules-table td:nth-child(2) {
+    width: 130px;
+    text-align: center;
+}
+
+.rules-table th:nth-child(3),
+.rules-table td:nth-child(3) {
+    text-align: left;
+}
+
+.rules-rule {
+    font-family: Arial, sans-serif;
+}
+
+.tree-diagram-box {
+    margin-top: 18px;
+    padding: 22px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    overflow-x: auto;
+}
+
+.tree-diagram-box svg {
+    max-width: 100%;
+    height: auto;
+}

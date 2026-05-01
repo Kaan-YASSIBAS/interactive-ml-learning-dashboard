@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision Tree</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <main class="container">
+        <section class="hero-card">
+            <a href="../index.html" class="back-link">← Ana Sayfaya Dön</a>
+
+            <div class="hero-header">
+                <span class="badge">Supervised Learning → Classification</span>
+                <h1>Decision Tree</h1>
+                <p class="subtitle">
+                    Decision Tree, veriyi karar kurallarıyla dallara ayırarak sınıflandırma yapan
+                    anlaşılması kolay bir Machine Learning algoritmasıdır.
+                </p>
+            </div>
+
+            <section class="content-grid">
+                <article class="info-card">
+                    <h2>Ne İşe Yarar?</h2>
+                    <p>
+                        Decision Tree, veriye sorular sorarak karar verir. Örneğin Iris dataset için
+                        “petal length belirli bir değerden küçük mü?” gibi kurallar oluşturabilir.
+                    </p>
+
+                    <h2>Temel Formül</h2>
+                    <div class="formula-box">
+                        Gini = 1 - Σ pᵢ²
+                    </div>
+
+                    <p>
+                        Gini impurity, bir düğümdeki sınıfların ne kadar karışık olduğunu ölçer.
+                        Gini düşükse düğüm daha temizdir. Decision Tree, veriyi daha temiz alt gruplara
+                        ayırmaya çalışır.
+                    </p>
+
+                    <h2>max_depth Ne Demek?</h2>
+                    <p>
+                        max_depth ağacın maksimum derinliğini belirler. Küçük değerler modeli basitleştirir.
+                        Büyük değerler train accuracy değerini artırabilir ama overfitting riskini de yükseltebilir.
+                    </p>
+                </article>
+
+                <article class="info-card">
+                    <h2>Decision Tree Deneyi</h2>
+
+                    <div class="form-group">
+                        <label for="maxDepthInput">Max Depth</label>
+                        <input type="number" id="maxDepthInput" min="1" max="10" step="1" value="3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sepalLengthInput">Sepal Length</label>
+                        <input type="number" id="sepalLengthInput" step="0.1" value="5.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sepalWidthInput">Sepal Width</label>
+                        <input type="number" id="sepalWidthInput" step="0.1" value="3.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="petalLengthInput">Petal Length</label>
+                        <input type="number" id="petalLengthInput" step="0.1" value="1.4">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="petalWidthInput">Petal Width</label>
+                        <input type="number" id="petalWidthInput" step="0.1" value="0.2">
+                    </div>
+
+                    <p class="small-note">Ondalık değerler için nokta kullanın. Örnek: 5.1</p>
+
+                    <button id="runButton">Decision Tree Çalıştır</button>
+
+                    <div id="errorBox" class="error hidden"></div>
+
+                    <section id="resultSection" class="hidden">
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <span>Max Depth</span>
+                                <strong id="depthValue">-</strong>
+                            </div>
+                            <div class="metric">
+                                <span>Train Accuracy</span>
+                                <strong id="trainAccuracyValue">-</strong>
+                            </div>
+                            <div class="metric">
+                                <span>Test Accuracy</span>
+                                <strong id="testAccuracyValue">-</strong>
+                            </div>
+                            <div class="metric">
+                                <span>Örnek Tahmin</span>
+                                <strong id="predictionValue">-</strong>
+                            </div>
+                        </div>
+
+                        <div class="probability-section">
+                            <h3>Örnek Çiçek İçin Olasılıklar</h3>
+
+                            <div class="probability-row">
+                                <div class="probability-label">
+                                    <span>Setosa</span>
+                                    <strong id="setosaText">-</strong>
+                                </div>
+                                <div class="bar-track">
+                                    <div id="setosaBar" class="bar-fill ham-bar"></div>
+                                </div>
+                            </div>
+
+                            <div class="probability-row">
+                                <div class="probability-label">
+                                    <span>Versicolor</span>
+                                    <strong id="versicolorText">-</strong>
+                                </div>
+                                <div class="bar-track">
+                                    <div id="versicolorBar" class="bar-fill spam-bar"></div>
+                                </div>
+                            </div>
+
+                            <div class="probability-row">
+                                <div class="probability-label">
+                                    <span>Virginica</span>
+                                    <strong id="virginicaText">-</strong>
+                                </div>
+                                <div class="bar-track">
+                                    <div id="virginicaBar" class="bar-fill svm-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </section>
+
+            <section class="info-card chart-section">
+                <h2>Karar Ağacı Görselleştirmesi</h2>
+                <p>
+                    Aşağıdaki diyagram, Decision Tree modelinin hangi kararı önce verdiğini ve dalların hangi sınıfa gittiğini gösterir.
+                    Sol dal koşul doğruysa, sağ dal koşul yanlışsa takip edilir.
+                </p>
+
+                <div class="tree-diagram-box">
+                    <div id="treeDiagram" class="mermaid"></div>
+                </div>
+            </section>
+
+            <section class="info-card chart-section">
+                <h2>Basit Karar Kuralları</h2>
+                <p>
+                    Aşağıdaki tablo, Decision Tree modelinin oluşturduğu karar düğümlerini ve yaprak tahminlerini gösterir.
+                    Derinlik arttıkça ağaç daha karmaşık hale gelir.
+                </p>
+
+                <table class="table rules-table">
+                    <thead>
+                        <tr>
+                            <th>Depth</th>
+                            <th>Type</th>
+                            <th>Rule</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rulesTableBody"></tbody>
+                </table>
+            </section>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="../js/decision-tree.js"></script>
+</body>
+</html>

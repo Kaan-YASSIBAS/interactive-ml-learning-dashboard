@@ -330,3 +330,99 @@ button:hover {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    font-size: 16px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.probability-section {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+}
+
+.probability-section h3 {
+    margin-top: 0;
+}
+
+.probability-row {
+    margin-bottom: 18px;
+}
+
+.probability-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+
+.bar-track {
+    height: 16px;
+    width: 100%;
+    border-radius: 999px;
+    background: #e5e7eb;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.ham-bar {
+    background: #10b981;
+}
+
+.spam-bar {
+    background: #ef4444;
+}
+
+.flow-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.flow-card {
+    padding: 18px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    font-weight: 900;
+}
+
+.flow-arrow {
+    font-size: 24px;
+    font-weight: 900;
+    color: #2563eb;
+}
+
+@media (max-width: 900px) {
+    .flow-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .flow-arrow {
+        text-align: center;
+        transform: rotate(90deg);
+    }
+}

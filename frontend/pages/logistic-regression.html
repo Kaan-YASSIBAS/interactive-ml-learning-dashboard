@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistic Regression</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <main class="container">
+        <section class="hero-card">
+            <a href="../index.html" class="back-link">← Ana Sayfaya Dön</a>
+
+            <div class="hero-header">
+                <span class="badge">Supervised Learning → Classification</span>
+                <h1>Logistic Regression</h1>
+                <p class="subtitle">
+                    Logistic Regression, bir verinin hangi sınıfa ait olduğunu olasılık üzerinden tahmin eden
+                    temel bir classification algoritmasıdır. Bu örnekte mesajın spam mı ham mı olduğunu tahmin ediyoruz.
+                </p>
+            </div>
+
+            <section class="content-grid">
+                <article class="info-card">
+                    <h2>Ne İşe Yarar?</h2>
+                    <p>
+                        Logistic Regression, ismine rağmen regression değil, classification için kullanılır.
+                        Model önce doğrusal bir skor üretir, sonra bu skoru sigmoid fonksiyonu ile 0 ve 1 arasında
+                        bir olasılığa dönüştürür.
+                    </p>
+
+                    <h2>Temel Formül</h2>
+
+                    <div class="formula-box">
+                        z = wx + b
+                    </div>
+
+                    <div class="formula-box">
+                        p = 1 / (1 + e<sup>-z</sup>)
+                    </div>
+
+                    <p>
+                        Burada <strong>z</strong> modelin doğrusal skorudur.
+                        <strong>p</strong> ise sınıfa ait olma olasılığıdır.
+                        Eğer olasılık belirli bir eşikten yüksekse model o sınıfı seçer.
+                    </p>
+
+                    <h2>Bu Demo Ne Yapıyor?</h2>
+                    <p>
+                        Mesaj text'i önce TF-IDF ile sayısal hale getirilir.
+                        Daha sonra Logistic Regression modeli mesajın <strong>spam</strong> mı
+                        yoksa <strong>ham</strong> mı olduğunu tahmin eder.
+                    </p>
+                </article>
+
+                <article class="info-card">
+                    <h2>Mesaj Sınıflandırma</h2>
+
+                    <div class="form-group">
+                        <label for="messageInput">Mesaj</label>
+                        <textarea id="messageInput" rows="6">Congratulations you won a free prize click now</textarea>
+                    </div>
+
+                    <button id="predictButton">Spam / Ham Tahmini Yap</button>
+
+                    <div id="predictionResult" class="result-box hidden"></div>
+                    <div id="errorBox" class="error hidden"></div>
+
+                    <section id="probabilitySection" class="probability-section hidden">
+                        <h3>Olasılık Değerleri</h3>
+
+                        <div class="probability-row">
+                            <div class="probability-label">
+                                <span>Ham</span>
+                                <strong id="hamProbabilityText">-</strong>
+                            </div>
+                            <div class="bar-track">
+                                <div id="hamBar" class="bar-fill ham-bar"></div>
+                            </div>
+                        </div>
+
+                        <div class="probability-row">
+                            <div class="probability-label">
+                                <span>Spam</span>
+                                <strong id="spamProbabilityText">-</strong>
+                            </div>
+                            <div class="bar-track">
+                                <div id="spamBar" class="bar-fill spam-bar"></div>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </section>
+
+            <section class="info-card chart-section">
+                <h2>Logistic Regression Akışı</h2>
+                <p>
+                    Logistic Regression text'i doğrudan anlayamaz. Bu yüzden mesaj önce TF-IDF ile sayısal vektöre
+                    çevrilir. Sonra model bu vektöre bakarak sınıf tahmini yapar.
+                </p>
+
+                <div class="flow-grid">
+                    <div class="flow-card">Raw Text</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-card">TF-IDF</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-card">Logistic Regression</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-card">Spam / Ham</div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="../js/logistic-regression.js"></script>
+</body>
+</html>
